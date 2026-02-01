@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veux-tu être ma Valentine ?</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #ffebee;
+            margin: 0;
+            text-align: center;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #e91e63;
+            font-size: 2.5em;
+        }
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        button {
+            padding: 12px 24px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        #yes {
+            background-color: #4caf50;
+            color: white;
+        }
+        #no {
+            background-color: #f44336;
+            color: white;
+            position: relative;
+        }
+        #no:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Jérémie t’invite à être sa Valentine…</h1>
+        <p>Alors, qu’en dis-tu ?</p>
+        <div class="buttons">
+            <button id="yes">OUI !</button>
+            <button id="no">NON</button>
+        </div>
+    </div>
+
+    <script>
+        const noButton = document.getElementById('no');
+        const yesButton = document.getElementById('yes');
+        const container = document.querySelector('.container');
+
+        noButton.addEventListener('mouseover', () => {
+            // Calculer une nouvelle position aléatoire pour le bouton "NON"
+            const containerRect = container.getBoundingClientRect();
+            const newX = Math.random() * (containerRect.width - 100);
+            const newY = Math.random() * (containerRect.height - 50);
+
+            noButton.style.position = 'absolute';
+            noButton.style.left = `${newX}px`;
+            noButton.style.top = `${newY}px`;
+        });
+
+        yesButton.addEventListener('click', () => {
+            alert("Génial ! On va passer une super Saint-Valentin ensemble ! ❤️");
+             window.location.href = "fleurs.html";
+        });
+    </script>
+</body>
+</html>

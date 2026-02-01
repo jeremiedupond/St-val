@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pluie de fleurs pour toi...</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: linear-gradient(to bottom, #ffebee, #e8f5e9);
+            height: 100vh;
+            font-family: 'Arial', sans-serif;
+        }
+        .flower {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-size: contain;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #d81b60;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            z-index: 2;
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="message">Joyeuse Saint-Valentin, Ireland ! ❤️</div>
+
+    <script>
+        // Nombre de fleurs
+        const flowerCount = 50;
+
+        // Tableau d'URLs de fleurs réalistes (SVG ou PNG)
+        const flowerTypes = [
+            'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50 10C30 10 10 30 10 50s20 40 40 40 40-20 40-40S70 10 50 10z" fill="%23ff69b4"/><path d="M50 20c-10 0-20 5-25 15l5 10c5-8 15-12 25-12s20 4 25 12l5-10c-5-10-15-15-25-15z" fill="%23ff1493"/><circle cx="50" cy="50" r="10" fill="%23ffd700"/></svg>',
+            'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50 10a20 20 0 1 0 0 40 20 20 0 1 0 0-40zm0 5a15 15 0 1 1 0 30 15 15 0 1 1 0-30zm20 45a5 5 0 1 1-10 0 5 5 0 0 1 10 0zm-40 0a5 5 0 1 1 10 0 5 5 0 0 1-10 0zm20 10a5 5 0 1 1 0-10 5 5 0 0 1 0 10zm10-10a5 5 0 1 1-10 0 5 5 0 0 1 10 0zm10 10a5 5 0 1 1 0-10 5 5 0 0 1 0 10z" fill="%23ff6347"/></svg>',
+            'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><ellipse cx="50" cy="30" rx="20" ry="10" fill="%23ffa500"/><ellipse cx="30" cy="50" rx="10" ry="15" fill="%23ff8c00"/><ellipse cx="70" cy="50" rx="10" ry="15" fill="%23ff8c00"/><ellipse cx="50" cy="70" rx="20" ry="10" fill="%23ffa500"/><circle cx="50" cy="50" r="8" fill="%23ffd700"/></svg>'
+        ];
+
+        // Créer les fleurs
+        for (let i = 0; i < flowerCount; i++) {
+            const flower = document.createElement('div');
+            flower.classList.add('flower');
+
+            // Choisir un type de fleur aléatoire
+            const flowerType = flowerTypes[Math.floor(Math.random() * flowerTypes.length)];
+            flower.style.backgroundImage = `url('${flowerType}')`;
+
+            // Position initiale aléatoire en haut de la page
+            flower.style.left = `${Math.random() * 100}vw`;
+            flower.style.top = `-50px`; // Commence au-dessus de la page
+
+            // Taille aléatoire
+            const size = 20 + Math.random() * 20;
+            flower.style.width = `${size}px`;
+            flower.style.height = `${size}px`;
+
+            // Ajouter à la page
+            document.body.appendChild(flower);
+
+            // Animation de chute
+            const speedY = 1 + Math.random() * 3; // Vitesse de chute aléatoire
+            const speedX = (Math.random() - 0.5) * 2; // Mouvement horizontal léger
+            const rotationSpeed = (Math.random() - 0.5) * 2; // Rotation aléatoire
+
+            let posX = parseFloat(flower.style.left);
+            let posY = -50;
+            let rotation = 0;
+
+            function animate() {
+                posY += speedY;
+                posX += speedX;
+                rotation += rotationSpeed;
+
+                // Si la fleur atteint le bas, la replacer en haut
+                if (posY > window.innerHeight + 50) {
+                    posY = -50;
+                    posX = Math.random() * window.innerWidth;
+                }
+
+                // Appliquer la position et la rotation
+                flower.style.transform = `rotate(${rotation}deg)`;
+                flower.style.left = `${posX}px`;
+                flower.style.top = `${posY}px`;
+
+                requestAnimationFrame(animate);
+            }
+
+            animate();
+        }
+    </script>
+</body>
+</html>
